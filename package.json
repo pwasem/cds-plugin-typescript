@@ -1,0 +1,66 @@
+{
+  "name": "cds-plugin-typescript",
+  "version": "0.1.0-alpha.0",
+  "description": "A CDS build plugin for SAP CAP that compiles TypeScript sources to JavaScript as part of cds build.",
+  "keywords": [
+    "cds",
+    "cap",
+    "sap",
+    "plugin",
+    "build",
+    "typescript"
+  ],
+  "author": "Pascal Wasem",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pwasem/cds-plugin-typescript.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pwasem/cds-plugin-typescript/issues"
+  },
+  "homepage": "https://github.com/pwasem/cds-plugin-typescript#readme",
+  "type": "module",
+  "main": "dist/cds-plugin.js",
+  "types": "dist/cds-plugin.d.ts",
+  "engines": {
+    "node": ">=22",
+    "npm": ">=10"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.4.15",
+    "@cap-js/cds-types": "^0.17.0",
+    "@types/node": "^24.12.4"
+  },
+  "peerDependencies": {
+    "@sap/cds": ">=8",
+    "typescript": ">=5",
+    "tsc-alias": ">=1"
+  },
+  "peerDependenciesMeta": {
+    "tsc-alias": {
+      "optional": true
+    }
+  },
+  "scripts": {
+    "clean": "rm -rf dist",
+    "build": "tsc -p tsconfig.build.json && tsc-alias -p tsconfig.build.json -f",
+    "prepublishOnly": "npm run build"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "exports": {
+    "./cds-plugin": "./dist/cds-plugin.js"
+  },
+  "cds": {
+    "schema": {
+      "buildTaskType": {
+        "name": "typescript",
+        "description": "TypeScript build plugin. Compiles TypeScript sources to JavaScript during cds build."
+      }
+    }
+  }
+}

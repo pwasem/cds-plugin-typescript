@@ -1,0 +1,24 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    // Restrict path aliases to src only (no test aliases needed for build)
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    },
+    // File Layout
+    "rootDir": "./src",
+    "outDir": "./dist",
+    // Emit Options
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true
+  },
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "test"
+  ]
+}
