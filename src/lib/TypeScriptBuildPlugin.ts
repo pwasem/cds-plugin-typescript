@@ -217,15 +217,9 @@ export class TypeScriptBuildPlugin extends CdsBuildPlugin {
    */
   private async removeTypeScriptSources(): Promise<void> {
     const tsFiles = await Array.fromAsync(
-      fs.glob(
-        [
-          '**/*.ts',
-          '!**/*.d.ts',
-        ],
-        {
-          cwd: this.task.dest,
-        },
-      ),
+      fs.glob('**/!(*.d).ts', {
+        cwd: this.task.dest,
+      }),
     )
 
     const tsPaths = tsFiles.map((file) => path.join(this.task.dest, file))
