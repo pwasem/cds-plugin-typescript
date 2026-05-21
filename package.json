@@ -30,12 +30,15 @@
   "devDependencies": {
     "@biomejs/biome": "^2.4.15",
     "@cap-js/cds-types": "^0.17.0",
-    "@types/node": "^24.12.4"
+    "@sap/cds": "^9.9.1",
+    "@types/node": "^24.12.4",
+    "tsc-alias": "^1.8.17",
+    "typescript": "^6.0.3"
   },
   "peerDependencies": {
     "@sap/cds": ">=8",
-    "typescript": ">=5",
-    "tsc-alias": ">=1"
+    "tsc-alias": ">=1",
+    "typescript": ">=5"
   },
   "peerDependenciesMeta": {
     "tsc-alias": {
