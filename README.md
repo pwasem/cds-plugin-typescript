@@ -107,23 +107,6 @@ The plugin automatically detects whether `tsc-alias` is listed in your `package.
 
 If `tsc-alias` is not listed in your `package.json`, the path alias resolution step is skipped entirely.
 
-### Source directory
-
-The default source directory is `srv`. Override it per task with the `src` property:
-
-```json
-{
-  "cds": {
-    "build": {
-      "tasks": [
-        { "for": "nodejs", "src": "srv" },
-        { "for": "typescript", "src": "srv" }
-      ]
-    }
-  }
-}
-```
-
 ## How it works
 
 The plugin extends `cds.build.Plugin` and is registered under the task type `typescript`. It runs at `Number.MIN_SAFE_INTEGER` priority, meaning it executes before all other build plugins so that compiled JavaScript is available when other tasks run.
