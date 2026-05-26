@@ -1,9 +1,6 @@
 import { createRequire } from 'node:module'
 import path from 'node:path'
-import {
-  type BuildPlugin,
-  TypeScriptBuildPlugin,
-} from '@/lib/TypeScriptBuildPlugin'
+import type { BuildPlugin } from '@/lib/TypeScriptBuildPlugin'
 
 // Resolve @sap/cds from the consuming project's directory (process.cwd()),
 // not from this file's location. This is critical when the plugin is consumed
@@ -27,6 +24,9 @@ if (typeof cdsWithBuild.build?.register !== 'function') {
   LOG.error('Could not register build plugin.')
 } else {
   LOG.info('Registering build plugin.')
+  const { TypeScriptBuildPlugin } = await import(
+    '@/lib/TypeScriptBuildPlugin.js'
+  )
   // biome-ignore lint/style/noNonNullAssertion: checked above
   ;(cds as CdsWithBuild).build!.register('typescript', TypeScriptBuildPlugin)
 }
