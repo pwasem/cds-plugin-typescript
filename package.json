@@ -1,6 +1,6 @@
 {
   "name": "cds-plugin-typescript",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "A CDS build plugin for SAP CAP that compiles TypeScript sources to JavaScript as part of cds build.",
   "keywords": [
     "cds",
@@ -28,7 +28,7 @@
     "npm": ">=10"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.4.15",
+    "@biomejs/biome": "^2.4.16",
     "@cap-js/cds-types": "^0.17.0",
     "@sap/cds": "^9.9.1",
     "@types/node": "^24.12.4",

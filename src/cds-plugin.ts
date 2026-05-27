@@ -20,9 +20,7 @@ type CdsWithBuild = typeof cds & {
 }
 
 const cdsWithBuild = cds as CdsWithBuild
-if (typeof cdsWithBuild.build?.register !== 'function') {
-  LOG.error('Could not register build plugin.')
-} else {
+if (typeof cdsWithBuild.build?.register === 'function') {
   LOG.info('Registering build plugin.')
   const { TypeScriptBuildPlugin } = await import(
     '@/lib/TypeScriptBuildPlugin.js'
