@@ -10,8 +10,6 @@ import type { BuildPlugin } from '@/lib/TypeScriptBuildPlugin'
 const projectRequire = createRequire(path.join(process.cwd(), 'package.json'))
 const cds: typeof import('@sap/cds') = projectRequire('@sap/cds')
 
-const LOG = cds.log('cds-plugin-typescript')
-
 type CdsWithBuild = typeof cds & {
   build?: {
     Plugin: typeof BuildPlugin
@@ -19,12 +17,18 @@ type CdsWithBuild = typeof cds & {
   }
 }
 
-const cdsWithBuild = cds as CdsWithBuild
-if (typeof cdsWithBuild.build?.register !== 'function') {
-  LOG.info('Registering build plugin.')
-  const { TypeScriptBuildPlugin } = await import(
-    '@/lib/TypeScriptBuildPlugin.js'
-  )
-  // biome-ignore lint/style/noNonNullAssertion: checked above
-  ;(cds as CdsWithBuild).build!.register('typescript', TypeScriptBuildPlugin)
+const LOG = cds.log('cds-plugin-typescript')
+
+try {
+  const cdsWithBuild = cds as CdsWithBuild
+  if (typeof cdsWithBuild.build?.register === 'function') {
+    LOG.info('Registering build plugin.')
+    const { TypeScriptBuildPlugin } = await import(
+      '@/lib/TypeScriptBuildPlugin.js'
+    )
+    // biome-ignore lint/style/noNonNullAssertion: checked above
+    ;(cds as CdsWithBuild).build!.register('typescript', TypeScriptBuildPlugin)
+  }
+} catch (err) {
+  LOG.error('Failed to register build plugin.', err)
 }
