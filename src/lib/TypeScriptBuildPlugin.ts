@@ -134,6 +134,14 @@ export class TypeScriptBuildPlugin extends CdsBuildPlugin {
   }
 
   /**
+   * Remove compiled JavaScript and source map files from the destination.
+   */
+  public override async clean(): Promise<void> {
+    LOG.info('Removing compiled JavaScript output')
+    await this.removeCompiledArtifacts()
+  }
+
+  /**
    * Execute a command within the plugin's task source directory.
    * Streams stdout as INFO messages and stderr with the given severity.
    * Returns the exit code of the child process.
@@ -224,6 +232,22 @@ export class TypeScriptBuildPlugin extends CdsBuildPlugin {
 
     const tsPaths = tsFiles.map((file) => path.join(this.task.dest, file))
     await Promise.all(tsPaths.map((tsPath) => fs.rm(tsPath)))
+  }
+
+  /**
+   * Remove generated JavaScript and source map files from the destination.
+   */
+  private async removeCompiledArtifacts(): Promise<void> {
+    const emittedFiles = await Array.fromAsync(
+      fs.glob('**/*.{js,map}', {
+        cwd: this.task.dest,
+      }),
+    )
+
+    const emittedPaths = emittedFiles.map((file) =>
+      path.join(this.task.dest, file),
+    )
+    await Promise.all(emittedPaths.map((emittedPath) => fs.rm(emittedPath)))
   }
 
   /**

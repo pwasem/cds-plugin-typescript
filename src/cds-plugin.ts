@@ -20,11 +20,9 @@ type CdsWithBuild = typeof cds & {
 }
 
 const cdsWithBuild = cds as CdsWithBuild
-if (typeof cdsWithBuild.build?.register === 'function') {
+if (typeof cdsWithBuild.build?.register !== 'function') {
   LOG.info('Registering build plugin.')
-  const { TypeScriptBuildPlugin } = await import(
-    '@/lib/TypeScriptBuildPlugin.js'
-  )
+  const { TypeScriptBuildPlugin } = await import('@/lib/TypeScriptBuildPlugin')
   // biome-ignore lint/style/noNonNullAssertion: checked above
   ;(cds as CdsWithBuild).build!.register('typescript', TypeScriptBuildPlugin)
 }

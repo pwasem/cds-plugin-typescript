@@ -28,10 +28,10 @@
     "npm": ">=10"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.4.16",
-    "@cap-js/cds-types": "^0.17.0",
+    "@biomejs/biome": "^2.5.1",
+    "@cap-js/cds-types": "^0.18.0",
     "@sap/cds": "^9.9.1",
-    "@types/node": "^24.12.4",
+    "@types/node": "^24.13.2",
     "tsc-alias": "^1.8.17",
     "typescript": "^6.0.3"
   },
