@@ -6,6 +6,6 @@
     "source.organizeImports.biome": "explicit",
     "source.fixAll.biome": "explicit"
   },
-  // "js/ts.tsdk.path": "node_modules/typescript/lib",n
+  "js/ts.tsdk.path": "node_modules/typescript7",
   "js/ts.experimental.useTsgo": true
 }

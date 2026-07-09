@@ -61,8 +61,8 @@ The `cds.build.tasks` configuration in `package.json` is **only** needed if you 
 }
 ```
 
-| Option     | Type     | Default | Description                                                                                        |
-| ---------- | -------- | ------- | -------------------------------------------------------------------------------------------------- |
+| Option     | Type     | Default | Description                                                                                             |
+| ---------- | -------- | ------- | ------------------------------------------------------------------------------------------------------- |
 | `tsConfig` | `string` | —       | Custom TypeScript config file path. When provided, this takes highest priority in the resolution order. |
 
 ### tsconfig resolution
@@ -121,6 +121,23 @@ The plugin extends `cds.build.Plugin` and is registered under the task type `typ
 **Clean step:**
 
 `cds build --clean` removes all `.js` and `.map` files emitted by this plugin from the destination directory.
+
+## TypeScript 7
+
+[TypeScript 7.0](https://devblogs.microsoft.com/typescript/announcing-typescript-7-0/) is a native Go port and does not ship with a programmatic API yet. Tools that rely on `import('typescript')` (such as `tsc-alias`, `typescript-eslint`, and CAP itself) still need the TypeScript 6 API.
+
+Microsoft provides a compatibility package [`@typescript/typescript6`](https://www.npmjs.com/package/@typescript/typescript6) that re-exports the TypeScript 6 API but renames its binary to `tsc6`, allowing TypeScript 6 and 7 to coexist. You can install both via npm aliases so that `npx tsc` uses TypeScript 7 while tooling that calls `import('typescript')` gets the TypeScript 6 API:
+
+```json
+{
+  "devDependencies": {
+    "@typescript/native": "npm:typescript@^7.0.2",
+    "typescript": "npm:@typescript/typescript6@^6.0.2"
+  }
+}
+```
+
+This plugin works with this setup out of the box — it shells out to `npx tsc` (TypeScript 7) and detects `tsc-alias` in your `package.json` (which continues to use the TypeScript 6 API transparently).
 
 ## Related
 
